@@ -5,7 +5,11 @@
 <h3>Trouble with Part 4: Interaction: </h3>
 
 I was having difficulty getting the interactivty working for part 4. I switched my d3 library to v4, because I was finding it easier to get the visualizations working. However, I found it was harder to find helpful tutorials when it came to mouse actions and interactivity. 
+-updated 2/15 - Managed to get mouseover and mouse out color changing working - however, still can not figure out appending coordinates to html paragraph on click. 
 
+
+<h3>Trouble with Part 3 - Dynamic linear scaling on the scatterplot </h3>
+-I think I fixed this, but there is still a spot where I think one of the scatters is relying on manual scaling and every time I try to fix that things break.
 
 
 <h3>Collaboration: </h3>
