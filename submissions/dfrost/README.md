@@ -1,4 +1,6 @@
-<header>Dan Frost, Readme for Project 0 </header>
+<h1>Dan Frost, Readme for Project 0 </h1>
+
+*Note - index8.html is the most updated index html right now
 
 <h3>Trouble with Part 4: Interaction: </h3>
 
