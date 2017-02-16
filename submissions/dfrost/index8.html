@@ -23,7 +23,9 @@
     <div id="partThree">
         <h1>Part Three &amp; Four: </h1>
         <div id="scatterplot">
+          <div id="sl"
             <p id="scatterLabel"></p>
+          </div>
         </div>
 	</div>
 
@@ -58,6 +60,8 @@
 // for scaling x and y domains correctly by max values from dataset
 // #4 http://stackoverflow.com/questions/38450349/uncaught-typeerror-cannot-read-property-linear-of-undefined
 // for more new v4 stuff that broke using v3 code from tutorial, syntax changes, etc..
+// #5 https://bl.ocks.org/d3noob/6f082f0e3b820b6bf68b78f2f7786084
+// for scaling x y ranges in v4 for a scatterplot
 
 
 
@@ -240,18 +244,17 @@ var margin1 = {
              .duration(500)
              .style("opacity", 0);
       })
-      .on("click", function(d) {d3.select("#scatterLabel")
-              .append("p")
-              .html(d.x + ", " + d.y);
-              })
+      //write text (x and y coordinates of selected circle) to div wrapper "sl" on-click
+      //now replaces previous coordinates on new click 
+      .on("click", function(d) {d3.select("#sl").text(d.x + ", " + d.y);
+	  		})
+	  });
 
 
-
-
-  });
 
         // Put your part five code here ***********************
 
+        //re-using part 3 scatter plot, copied 4 times and uploading 4 different anscombe datasets.
         var margin1 = {
              'left': 25,
              'right': 20,
