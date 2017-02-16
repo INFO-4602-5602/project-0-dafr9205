@@ -16,7 +16,7 @@ I was having difficulty getting the interactivty working for part 4. I switched 
 I worked with Ben Galassi for a good portion of the first parts (parts 1 and 2, and a little bit of part 3). 
 
 Sources: 
-I listed a number of sources in the source code on index.html. The plan is to remove those comments before Friday and include those notes in this readme. (We'll see if I do it in time.) 
+I listed a number of sources in the source code on index.html. The plan is to remove those comments before Friday and include those notes in this readme.
 
 
 
