@@ -237,11 +237,17 @@ var margin1 = {
         d3.select(this).attr("r", 10).style("fill", "steelblue");
       })
       .on("mouseout", function(d) {
-        d3.select(this).attr("r", 5.5).style("fill", "black")
+        d3.select(this).attr("r", 5.5).style("fill", "black");
         tooltip.transition()
              .duration(500)
              .style("opacity", 0);
       })
+      .on("click", function(d) {d3.select("#scatterLabel")
+              .append("p")
+      	  		.html(d.x + ", " + d.y);
+      	  		})
+
+
 
 // I could not manage to get the on click function working, and was not sure how to append the coordinates to the p tag in html
       // .on("click", function(d) {
