@@ -13,11 +13,22 @@ I was having difficulty getting the interactivty working for part 4. I switched 
 
 
 <h3>Collaboration: </h3>
-I worked with Ben Galassi for a good portion of the first parts (parts 1 and 2, and a little bit of part 3). 
+I worked with Ben Galassi on this project.  
 
 Sources: 
-I listed a number of sources in the source code on index.html. The plan is to remove those comments before Friday and include those notes in this readme.
+I listed a number of sources in the source code on index.html that I used for reference when creating my charts. They are also listed below: 
 
+//Sources used for this project:
+// #1 https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4
+// for help setting up bar graph using v4 d3 library
+// #2 http://stackoverflow.com/questions/11300059/appending-d3-js-canvas-to-div
+// for help appending a chart to a div
+// #3 http://www.d3noob.org/2012/12/setting-scales-domains-and-ranges-in.html
+// for scaling x and y domains correctly by max values from dataset
+// #4 http://stackoverflow.com/questions/38450349/uncaught-typeerror-cannot-read-property-linear-of-undefined
+// for more new v4 stuff that broke using v3 code from tutorial, syntax changes, etc..
+// #5 https://bl.ocks.org/d3noob/6f082f0e3b820b6bf68b78f2f7786084
+// for scaling x y ranges in v4 for a scatterplot
 
 
 
