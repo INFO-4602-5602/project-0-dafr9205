@@ -1,0 +1,444 @@
+<html>
+<head>
+<title>Project 0</title>
+<style type="text/css" href="project0.css"></style>
+<style>
+  .left{float:left; width:50%;}
+  .right{float:right; width:50%;}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!--Put your D3 import statement between these two lines-->
+    <script src="//d3js.org/d3.v4.min.js"></script>
+<!--Put your D3 import statement between these two lines-->
+</head>
+
+<body>
+	<div id="partOne">
+        <h1>Part One: </h1>
+
+	</div>
+
+    <div id="partTwo">
+        <h1>Part Two: </h1>
+        <h3>anscombe_I</h3>
+        <div id="barchart">
+        </div>
+	</div>
+
+    <div id="partThree">
+        <h1>Part Three &amp; Four: </h1>
+        <div id="scatterplot">
+          <h3>anscombe_I</h3>
+          <div id="sl"
+            <p id="scatterLabel"></p>
+          </div>
+        </div>
+	</div>
+
+<!--Figured out how to stack the charts into a 4 quadrant with "in-html" styling-->
+    <div id="partFive">
+        <h1>Part Five: </h1>
+        <div id="scatterplotSet">
+        </div>
+        <div class= "left" id="anscombe_I">
+          <h3>anscombe_I</h3>
+        </div>
+        <div class= "left" id="anscombe_II">
+          <h3>anscombe_II</h3>
+        </div>
+
+        <div class= "right" id="anscombe_IV">
+          <h3>anscombe_IV</h3>
+        </div>
+        <div class= "right" id="anscombe_III">
+          <h3>anscombe_III</h3>
+        </div>
+
+	</div>
+
+    <script type="text/javascript">
+//Team-work: I teamed up with Ben Galassi to work on this project.
+//Sources used for this project:
+// #1 https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4
+// for help setting up bar graph using v4 d3 library
+// #2 http://stackoverflow.com/questions/11300059/appending-d3-js-canvas-to-div
+// for help appending a chart to a div
+// #3 http://www.d3noob.org/2012/12/setting-scales-domains-and-ranges-in.html
+// for scaling x and y domains correctly by max values from dataset
+// #4 http://stackoverflow.com/questions/38450349/uncaught-typeerror-cannot-read-property-linear-of-undefined
+// for more new v4 stuff that broke using v3 code from tutorial, syntax changes, etc..
+// #5 https://bl.ocks.org/d3noob/6f082f0e3b820b6bf68b78f2f7786084
+// for scaling x y ranges in v4 for a scatterplot
+// Put your part one code here ***********************
+var w = 700; // Width of our visualization
+var h = 500; // Height of our visualization
+var margin = 10; // Margin around visualization
+var xOffset = 40; // Space for x-axis labels
+var yOffset = 100; // Space for y-axis labels
+var vals = ['x', 'y']; // List of data attributes
+var xVal = vals[0]; // Value to plot on x-axis
+var yVal = vals[1]; // Value to plot on y-axis
+    d3.csv('anscombe_I.csv', function(dataset) {
+      var data1 = checkDataset(dataset);
+        });
+      d3.csv('anscombe_II.csv', function(dataset) {
+        var data2 = checkDataset(dataset);
+          });
+        d3.csv('anscombe_III.csv', function(dataset) {
+          var data3 = checkDataset(dataset);
+            });
+          d3.csv('anscombe_IV.csv', function(dataset) {
+            var data4 = checkDataset(dataset);
+              });
+        // Leave this to test your data uploading. All data uploading should be above this line
+        function checkDataset(dataset) {
+            if (dataset.length == 11)
+                $("#partOne").append("<p>data loaded correctly</p>");
+            else
+                $("#partOne").append("<p>data loaded incorrectly. Try using the debugger to help you find the bug!</p>");
+        }
+// Put your part two code here ***********************
+// set the dimensions &  margins for the bar graph
+var margin = {top: 15, right: 15, bottom: 15, left: 18},
+    width = 600 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+// set the x and y ranges (scaleBand is new in v4)
+//Constructs a new band scale with the empty domain, the unit range [0, 1], no padding, no rounding and center alignment.
+var x = d3.scaleBand()
+          .range([0, width])
+          .padding(0.1);
+var y = d3.scaleLinear()
+          .range([height, 0]);
+// append '#barchart' element to 'svg' to get in in the div in part 2
+var svg = d3.select("#barchart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+// last line moves the svg element to the top left margin of the barchart div
+// Pull in the data from anscombe number 1 dataset
+d3.csv("anscombe_I.csv", function(data) {
+  var data1 = data;
+  // formatting for the dataset values
+  data.forEach(function(d) {
+    d.y = +d.y;
+  });
+  // Scale the range of the data in the domains
+  x.domain(data.map(function(d) { return d.x; }));
+  y.domain([0, d3.max(data, function(d) { return d.y; })]);
+  // append the rectangles "bar" to the chart
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.x); })
+      .attr("width", x.bandwidth())
+      .attr("y", function(d) { return y(d.y); })
+      .attr("height", function(d) { return height - y(d.y); });
+  // adding our x-Axis and specifying which axis it goes on
+  svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+  // adding our y-axis and specifying which axis it goes on
+  svg.append("g")
+      .call(d3.axisLeft(y));
+});
+        // Put your part three & four code here ***********************
+// PART THREE CODE:
+//set the dimensions and margins of the graph
+var margin1 = {
+     'left': 25,
+     'right': 20,
+     'top': 20,
+     'bottom': 20
+   }
+   var width1 = 450 - margin1.left - margin1.right;
+   var height1 = 450 - margin1.top - margin1.bottom;
+  //  var ansVals = ['x', 'y']; // List of data attributes
+  //  var ansValX = ansVals[0]; // Value to plot on x-axis
+  //  var ansValY = ansVals[1]; /
+  // var xOffset = 40; // Space for x-axis labels
+  // var yOffset = 100; // Space for y-axis labels
+
+//update 2.16.17 @ 6:47 PM - For the life of me, I still cannot get the x and y scaling right
+//I commented out my variables and retained manual scaling, and will email you to see if I can figure
+//this out before final submission
+
+   var x1 = d3.scaleLinear()
+            .range([0, width1])
+            .domain([0,14]);
+   var y1 = d3.scaleLinear()
+            .range([height1, 0])
+            .domain([0, 11]);
+//create the x axis, add ticks, call x1 for scaling
+   var xAxis = d3.axisBottom()
+      .scale(x1)
+      .tickSize(-height1)
+//create the y axis, add ticks, call y1 for scaling
+   var yAxis = d3.axisLeft()
+      .scale(y1)
+      .tickSize(-width)
+//pulling the data from datset1
+  d3.csv('anscombe_I.csv', function(data){
+      var data2 = data;
+//formatting the data
+    data.forEach(function(d) {
+      d.x = +d.x;
+      d.y = +d.y;
+    });
+//create a new image and tie it to div scatterplot in html
+    var scatter = d3.select('#scatterplot').append('svg')
+                  .attr('width', width1+margin1.left+margin1.right)
+                  .attr('height', height1+margin1.top+margin1.bottom)
+                  .append('g')
+                    .attr("transform",
+                          "translate("
+                          + margin1.left + ","
+                          + margin1.top + ")" );
+//adding x axis appending "graphic" to previously created x axis
+    scatter.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + (height1) + ")")
+      .call(xAxis);
+//adding y axis appending "graphic" to previously created y axis
+    scatter.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+//creating the circles for the scatterplot
+    var circles = scatter.selectAll('circle')
+                .data(data);
+//defining the circles position, radius
+//finally figured out how to get the mouseover and mouse out color change working, and coordinate printing on click
+    circles.enter()
+      .append('circle')
+      .attr('cy', function(d) {return y(d.y);})
+      .attr('cx', function(d) {return x(d.x);})
+      .attr('r', 5)
+      .on("mouseover", function(d) {
+        d3.select(this).attr("r", 10).style("fill", "steelblue");
+      })
+      .on("mouseout", function(d) {
+        d3.select(this).attr("r", 5.5).style("fill", "black");
+        circles.transition()
+             .duration(500)
+             .style("opacity", 0);
+      })
+      //write text (x and y coordinates of selected circle) to div wrapper "sl" on-click
+      //now replaces previous coordinates on new click
+      .on("click", function(d) {d3.select("#sl").text(d.x + ", " + d.y);
+	  		})
+	  });
+        // Put your part five code here ***********************
+        //re-using part 3 scatter plot, copied 4 times and uploading 4 different anscombe datasets.
+        d3.csv('anscombe_I.csv', function(error, data){
+            var data3 = data;
+          data.forEach(function(d) {
+            d.x = +d.x;
+            d.y = +d.y;
+          });
+
+        var margin1 = {
+             'left': 25,
+             'right': 20,
+             'top': 20,
+             'bottom': 20
+           }
+           var width1 = 450 - margin1.left - margin1.right;
+           var height1 = 450 - margin1.top - margin1.bottom;
+
+           var x2 = d3.scaleLinear()
+                    .range([0, width1])
+                    .domain([0,14]);
+           var y2 = d3.scaleLinear()
+                    .range([height1, 0])
+                    .domain([0, 11]);
+           var xAxis = d3.axisBottom()
+              .scale(x2)
+              .tickSize(-height1)
+           var yAxis = d3.axisLeft()
+              .scale(y2)
+              .tickSize(-width)
+
+            var scatter1 = d3.select('#anscombe_I').append('svg')
+                          .attr('width', width1+margin1.left+margin1.right)
+                          .attr('height', height1+margin1.top+margin1.bottom)
+                          .append('g')
+                            .attr("transform",
+                                  "translate("
+                                  + margin1.left + ","
+                                  + margin1.top + ")" )
+            scatter1.append("g")
+              .attr("class", "x axis")
+              .attr("transform", "translate(0," + (height1) + ")")
+              .call(xAxis);
+            scatter1.append("g")
+              .attr("class", "y axis")
+              .call(yAxis);
+            var circles = scatter1.selectAll('circle')
+                        .data(data);
+            circles.enter()
+              .append('circle')
+              .attr('cy', function(d) {return y(d.y);})
+              .attr('cx', function(d) {return x(d.x);})
+              .attr('r', 5)
+          });
+          //----------------------------------------------------------------
+          //anscombe II scattor plot
+          var margin1 = {
+               'left': 25,
+               'right': 20,
+               'top': 20,
+               'bottom': 20
+             }
+             var width1 = 450 - margin1.left - margin1.right;
+             var height1 = 450 - margin1.top - margin1.bottom;
+             var x1 = d3.scaleLinear()
+                      .range([0, width1])
+                      .domain([0,14]);
+             var y1 = d3.scaleLinear()
+                      .range([height1, 0])
+                      .domain([0, 11]);
+             var xAxis = d3.axisBottom()
+                .scale(x1)
+                .tickSize(-height1)
+             var yAxis = d3.axisLeft()
+                .scale(y1)
+                .tickSize(-width)
+            d3.csv('anscombe_II.csv', function(error, data){
+                var data4 = data;
+              data.forEach(function(d) {
+                d.x = +d.x;
+                d.y = +d.y;
+              });
+              var scatter2 = d3.select('#anscombe_II').append('svg')
+                            .attr('width', width1+margin1.left+margin1.right)
+                            .attr('height', height1+margin1.top+margin1.bottom)
+                            .append('g')
+                              .attr("transform",
+                                    "translate("
+                                    + margin1.left + ","
+                                    + margin1.top + ")" );
+              scatter2.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + (height1) + ")")
+                .call(xAxis);
+              scatter2.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+              var circles = scatter2.selectAll('circle')
+                          .data(data);
+              circles.enter()
+                .append('circle')
+                .attr('cy', function(d) {return y(d.y);})
+                .attr('cx', function(d) {return x(d.x);})
+                .attr('r', 5)
+            });
+//----------------------------------------------------------------
+//anscombe III scattor plot
+var margin1 = {
+     'left': 25,
+     'right': 20,
+     'top': 20,
+     'bottom': 20
+   }
+   var width1 = 450 - margin1.left - margin1.right;
+   var height1 = 450 - margin1.top - margin1.bottom;
+   var x1 = d3.scaleLinear()
+            .range([0, width1])
+            .domain([0,14]);
+   var y1 = d3.scaleLinear()
+            .range([height1, 0])
+            .domain([0, 11]);
+   var xAxis = d3.axisBottom()
+      .scale(x1)
+      .tickSize(-height1)
+   var yAxis = d3.axisLeft()
+      .scale(y1)
+      .tickSize(-width)
+d3.csv('anscombe_III.csv', function(error, data){
+  var data6 = data;
+  data.forEach(function(d) {
+    d.x = +d.x;
+    d.y = +d.y;
+  });
+  var scatter3 = d3.select('#anscombe_III').append('svg')
+                .attr('width', width1+margin1.left+margin1.right)
+                .attr('height', height1+margin1.top+margin1.bottom)
+                .append('g')
+                  .attr("transform",
+                        "translate("
+                        + margin1.left + ","
+                        + margin1.top + ")" );
+  scatter3.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + (height1) + ")")
+    .call(xAxis);
+  scatter3.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
+  var circles = scatter3.selectAll('circle')
+              .data(data);
+  circles.enter()
+    .append('circle')
+    .attr('cy', function(d) {return y(d.y);})
+    .attr('cx', function(d) {return x(d.x);})
+    .attr('r', 5)
+});
+//-------------------------------------------------------------------
+//anscombe IV scattor plot
+var margin1 = {
+     'left': 25,
+     'right': 20,
+     'top': 20,
+     'bottom': 20
+   }
+   var width1 = 450 - margin1.left - margin1.right;
+   var height1 = 450 - margin1.top - margin1.bottom;
+   var x1 = d3.scaleLinear()
+            .range([0, width1])
+            .domain([0,14]);
+   var y1 = d3.scaleLinear()
+            .range([height1, 0])
+            .domain([0, 11]);
+   var xAxis = d3.axisBottom()
+      .scale(x1)
+      .tickSize(-height1)
+   var yAxis = d3.axisLeft()
+      .scale(y1)
+      .tickSize(-width)
+d3.csv('anscombe_IV.csv', function(error, data){
+  var data6 = data;
+  data.forEach(function(d) {
+    d.x = +d.x;
+    d.y = +d.y;
+  });
+  var scatter4 = d3.select('#anscombe_IV').append('svg')
+                .attr('width', width1+margin1.left+margin1.right)
+                .attr('height', height1+margin1.top+margin1.bottom)
+                .append('g')
+                  .attr("transform",
+                        "translate("
+                        + margin1.left + ","
+                        + margin1.top + ")" );
+  scatter4.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + (height1) + ")")
+    .call(xAxis);
+  scatter4.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
+  var circles = scatter4.selectAll('circle')
+              .data(data);
+  circles.enter()
+    .append('circle')
+    .attr('cy', function(d) {return y(d.y);})
+    .attr('cx', function(d) {return x(d.x);})
+    .attr('r', 5)
+});
+    </script>
+</body>
+
+
+</html>
