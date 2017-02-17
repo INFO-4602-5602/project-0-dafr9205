@@ -3,14 +3,16 @@
 <h3>Trouble with Part 4: Interaction: </h3>
 
 I was having difficulty getting the interactivty working for part 4. I switched my d3 library to v4, because I was finding it easier to get the visualizations working. However, I found it was harder to find helpful tutorials when it came to mouse actions and interactivity. 
+
 -update 2/15 - Managed to get mouseover and mouse out color changing working - however, still can not figure out appending coordinates to html paragraph on click.
+
 -update 2/16 - All interactivity is now functioning! 
 
 
 <h3>Trouble with Part 3 - Dynamic linear scaling on the scatterplot </h3>
 -Despite my best efforts, I still could not get my scatterplot to work with min and max domains for xScale and yScale by tailoring it off of the scatterTutorial.js.
 
---UPDATE 2/16/17, 10:02PM-- I fixed all the issues with the scatter plots! I used the scatterJS tutorial, created a new scatter in a new file and started fresh, got all the anscombe's to display correctly, and put it back into my original project. 
+--UPDATE 2/16/17, 10:02PM-- I fixed the issues with the scatter plots! I used the scatterJS tutorial, created a new scatter in a new file and started fresh, got all the anscombe's to display correctly, and put it back into my original project. 
 
 PROBLEMS RESOLVED. ALL OF THEM :)
 
