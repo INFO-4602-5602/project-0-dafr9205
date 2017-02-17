@@ -1,4 +1,9 @@
-<h1>Dan Frost, Readme for Project 0 </h1>
+<h1>Daniel Frost - Readme for Project 0 </h1>
+
+<h3> Bells and Whistles Added </h3>
+
+-Tooltip displaying X and Y coordinates on hover succesfully implemented. 
+
 
 <h3>Trouble with Part 4: Interaction: </h3>
 
@@ -14,7 +19,7 @@ I was having difficulty getting the interactivty working for part 4. I switched 
 
 --UPDATE 2/16/17, 10:02PM-- I fixed the issues with the scatter plots! I used the scatterJS tutorial, created a new scatter in a new file and started fresh, got all the anscombe's to display correctly, and put it back into my original project. 
 
-PROBLEMS RESOLVED. ALL OF THEM :)
+PROBLEMS RESOLVED :)
 
 WOO HOO!!!!
 
@@ -22,7 +27,8 @@ WOO HOO!!!!
 <h3>Collaboration: </h3>
 I worked with Ben Galassi on this project.  
 
-Sources: 
+<h3> Sources: </h3>
+
 I listed a number of sources in the source code on index.html that I used for reference when creating my charts. They are also listed below: 
 
 //Sources used for this project:
