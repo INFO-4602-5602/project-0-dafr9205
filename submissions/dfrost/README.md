@@ -1,7 +1,5 @@
 <h1>Dan Frost, Readme for Project 0 </h1>
 
-*Note - index8.html is the most updated index html right now
-
 <h3>Trouble with Part 4: Interaction: </h3>
 
 I was having difficulty getting the interactivty working for part 4. I switched my d3 library to v4, because I was finding it easier to get the visualizations working. However, I found it was harder to find helpful tutorials when it came to mouse actions and interactivity. 
