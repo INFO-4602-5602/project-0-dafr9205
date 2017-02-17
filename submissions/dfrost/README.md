@@ -10,8 +10,8 @@ I was having difficulty getting the interactivty working for part 4. I switched 
 
 
 <h3>Trouble with Part 3 - Dynamic linear scaling on the scatterplot </h3>
--Despite my best efforts, I still could not get my scatterplot to work with min and max domains fir xScale and yScale by tailoring it off of the scatterTutorial.js. After I introduced the vals variables (vals, xVals, yVals, vals[0] and [1] to grab the columns from the data, etc..) and I introduced the functions getNextVal, setXval, setYval, etc.. I started received NaN (not a number) js errors. I tried to find v4 equivants for these functions and the scaling, but I could not implement the changes in time.
--To my absolute dismay, I am leaving the manual scaling in for the scatterplot. 
+-Despite my best efforts, I still could not get my scatterplot to work with min and max domains for xScale and yScale by tailoring it off of the scatterTutorial.js. After I introduced the vals variables (vals, xVals, yVals, vals[0] and [1] to grab the columns from the data, etc..) and I introduced the functions getNextVal, setXval, setYval, etc.. I started received NaN (not a number) js errors. I tried to find v4 equivants for these functions and the scaling, but I could not implement the changes in time.
+-After hours of working on it, and to my absolute dismay, I am leaving the manual scaling in for the scatterplots. 
 
 
 <h3>Collaboration: </h3>
