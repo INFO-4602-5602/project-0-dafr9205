@@ -14,6 +14,7 @@
 4. Magically I had my bar chart, and the X and Y values were displaying just like my bar chart original from D3. 
 5. The only things left were to adjust color (not hard, switched to black) - and then looked up bar thickness. Without going through a whole mess of creating custom polygons, I figured out that if I switched the X values from "continuous" to "discrete" I could make the bars a lot thicker. 
 6. I adjusted thickness to try and match to my chart as much as possible. The ONLY thing I couldnt figure out was that it was arranging x values by ordinance, which I didnt want. I wanted x values to display in order of occurence in the dataset. But this was as close as I could get the Tableau version to display. 
+6a. *UPDATE* I figured out how to manually sort the arrangement of x column, and changed the order to reflect the original chart and original order of data. 
 
 <h3>Trouble with Part 4: Interaction: </h3>
 
